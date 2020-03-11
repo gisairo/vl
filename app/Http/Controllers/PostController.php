@@ -27,6 +27,7 @@ class PostController extends Controller
     public function edit($id)
     {
   		$post = Post::find($id);
+  		// $data = ['post'=>$post, 'category'=>$post->category];
   		return response()->json($post);
     }
 

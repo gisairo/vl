@@ -2139,6 +2139,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38576,6 +38578,8 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(post.body))]),
             _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(post.category))]),
+            _vm._v(" "),
             _c(
               "td",
               [
@@ -38622,9 +38626,11 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Item Name")]),
+        _c("th", [_vm._v("Item Title")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Item Price")]),
+        _c("th", [_vm._v("Item Body")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Item Category")]),
         _vm._v(" "),
         _c("th", [_vm._v("Actions")])
       ])
