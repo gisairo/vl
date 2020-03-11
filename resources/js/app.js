@@ -26,11 +26,12 @@ Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('app-component', require('./App.vue').default);
 import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
 import EditComponent from './components/EditComponent.vue';
+import App from './App.vue';
 
 const routes = [
   {
