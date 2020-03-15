@@ -2037,10 +2037,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      post: {}
+      post: {},
+      category: 0,
+      categories: []
     };
   },
   created: function created() {
@@ -2050,18 +2063,36 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.post = response.data;
     });
+    var uri2 = "http://vl.test/api/categories";
+    this.axios.get(uri2).then(function (response2) {
+      _this.categories = response2.data.data; // console.log(this.categories);
+    });
   },
   methods: {
-    updatePost: function updatePost() {
+    updatePost: function updatePost(values) {
       var _this2 = this;
 
       var uri = "http://vl.test/api/post/update/".concat(this.$route.params.id);
-      this.axios.post(uri, this.post).then(function (response) {
+      var data2 = {
+        post: this.post,
+        category: this.$route.params
+      };
+      console.log(this.category);
+      this.axios.post(uri, data2).then(function (response) {
         _this2.$router.push({
           name: 'posts'
         });
       });
-    }
+    } // getCategory: function() {
+    //   axios.get('http://vl.test/api/getCategory',{
+    //     params: {
+    //       category_id: this.category
+    //    }
+    //   }).then(function(response){
+    //         this.states = response.data;
+    //     }.bind(this));
+    // }
+
   }
 });
 
@@ -2107,6 +2138,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -38462,6 +38494,64 @@ var render = function() {
         ]),
         _c("br"),
         _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Select Category:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.categories.title,
+                      expression: "categories.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "category_name" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.categories,
+                        "title",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0" } }, [
+                    _vm._v("Select Category")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(data) {
+                    return _c(
+                      "option",
+                      { key: data.id, domProps: { value: data.id } },
+                      [_vm._v(_vm._s(data.title))]
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ]),
+        _c("br"),
+        _vm._v(" "),
         _vm._m(0)
       ]
     )
@@ -38578,7 +38668,7 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(post.body))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(post.category))]),
+            _c("td", [_vm._v(_vm._s(post.category.title))]),
             _vm._v(" "),
             _c(
               "td",
