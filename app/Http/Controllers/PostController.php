@@ -12,9 +12,12 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
+    	$category = (Object)$request->category;
+		$postData = (Object)$request->post;
         $post = new Post([
-        'title' => $request->get('title'),
-        'body' => $request->get('body')
+	        'title' => $postData->title,
+	        'body' => $postData->body,
+	        'category_id' =>$category->id,
         ]);
 
         $post->save();
@@ -23,16 +26,12 @@ class PostController extends Controller
     }
     public function index()
     {
-        // return new PostCollection(Post::all());
         return new PostCollection(Post::with('category')->get());
-        // return Category::with('posts')->get();
     }
 
     public function edit($id)
     {
     	$post = Post::find($id);
-  		// $post = Post::with('category')->find($id);
-  		// $data = ['post'=>$post, 'categories'=>Category::all()];
   		return response()->json($post);
     }
 
@@ -44,10 +43,12 @@ class PostController extends Controller
     public function update($id, Request $request)
     {
 		$post = Post::find($id);
-		dd($request->all());
-
-		$post->update($request->all());
-
+		$category = (Object)$request->category;
+		$postData = (Object)$request->post;
+		$post->title=$postData->title;
+		$post->body=$postData->body;
+		$post->category_id=$category->id;
+		$result=$post->save();
 		return response()->json('successfully updated');
     }
 

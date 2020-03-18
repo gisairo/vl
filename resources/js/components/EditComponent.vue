@@ -20,13 +20,11 @@
         </div><br />
         <div class="row">
           <div class="col-md-6">
-            <div class="form-group">
-              <label>Select Category:</label>
-              <select class='form-control' v-model='categories.title' name="category_name" >
-                <option value='0' >Select Category</option>
-                <option v-for='data in categories' :key="data.id" v-bind:value='data.id'>{{ data.title }}</option>
-              </select>
-            </div>
+            <select v-model="category">
+                  <option value='0' >Select Category</option>
+                   <option v-for="category in categories" v-bind:value="{ id: category.id, text: category.title }">{{ category.title }}
+                   </option>
+               </select>
           </div>
         </div><br />
         <div class="form-group">
@@ -39,7 +37,8 @@
 <script>
     
     export default {
-
+          // options:categories
+      // cat: '1',
       data() {
         return {
           post: {},
@@ -59,23 +58,13 @@
         });
       },
       methods: {
-        updatePost(values) {
+        updatePost() {
           let uri = `http://vl.test/api/post/update/${this.$route.params.id}`;
-          let data2 = {post: this.post, category:this.$route.params};
-          console.log(this.category); 
-          this.axios.post(uri, data2 ).then((response) => {
+          let data2 = {post: this.post, category:this.category};
+          this.axios.post(uri, data2).then((response) => {
             this.$router.push({name: 'posts'});
           });
         },
-        // getCategory: function() {
-        //   axios.get('http://vl.test/api/getCategory',{
-        //     params: {
-        //       category_id: this.category
-        //    }
-        //   }).then(function(response){
-        //         this.states = response.data;
-        //     }.bind(this));
-        // }
       }
     }
 </script>

@@ -32,6 +32,8 @@ import CreateComponent from './components/CreateComponent.vue';
 import IndexComponent from './components/IndexComponent.vue';
 import EditComponent from './components/EditComponent.vue';
 import App from './App.vue';
+import Vue from 'vue';
+import vSelect from 'vue-select'; 
 
 const routes = [
   {
@@ -55,6 +57,8 @@ const routes = [
       component: EditComponent
   }
 ];
+Vue.component('v-select', vSelect); 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

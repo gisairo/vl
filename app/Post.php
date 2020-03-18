@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     //prevent mass assignment known issue with orms
-     protected $fillable = ['title', 'body', 'category'];
+     protected $fillable = ['title', 'body', 'category_id', 'category'];
 
      public function category()
      {

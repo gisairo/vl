@@ -18,6 +18,15 @@
             </div>
           </div>
         </div><br />
+        <div class="row">
+          <div class="col-md-6">
+            <select v-model="category">
+                  <option value='0' >Select Category</option>
+                   <option v-for="category in categories" v-bind:value="{ id: category.id, text: category.title }">{{ category.title }}
+                   </option>
+               </select>
+          </div>
+        </div><br />
         <div class="form-group">
           <button class="btn btn-primary">Create</button>
         </div>
@@ -28,18 +37,28 @@
 <script>
     export default {
         data(){
-        return {
-          post:{}
-        }
-    },
-    methods: {
-      addPost(){
-        // console.log(this.post);
-        let uri = 'http://vl.test/api/post/create';
-            this.axios.post(uri, this.post).then((response) => {
+          return {
+            post:{},
+            category: 0,
+            categories:[],
+          };
+        },
+        created(){
+          let category_uri = `http://vl.test/api/categories`;
+          this.axios.get(category_uri).then((response2) => {
+              this.categories = response2.data.data;
+              // console.log(this.categories);
+          });
+        },
+        methods: {
+          addPost(){
+            // console.log(this.post);
+            let uri = 'http://vl.test/api/post/create';
+            let data = {post: this.post, category:this.category};
+            this.axios.post(uri, data).then((response) => {
                this.$router.push({name: 'posts'});
             });
-      }
-    }
+          }
+        }
   }
 </script>
