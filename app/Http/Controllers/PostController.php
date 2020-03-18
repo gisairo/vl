@@ -12,6 +12,10 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
+  //   	$request->validate([
+		//     'category' => 'required',
+		//     'post' => 'required',
+		// ]);
     	$category = (Object)$request->category;
 		$postData = (Object)$request->post;
         $post = new Post([
